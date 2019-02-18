@@ -7,15 +7,18 @@ class Form extends Component {
   render() {
     return (
       <div>
-        <p>Find a Repo</p>
-        <form onSubmit={this.handleSubmit}>
+        <p className="find">Search for a Repo</p>
+        <form className="form" onSubmit={this.handleSubmit}>
           <label htmlFor="seach" />
           <input
             id="search"
             value={this.state.value}
             onChange={this.handleChange}
+            className="input"
           />
-          <button type="submit">Submit</button>
+          <button className="button" type="submit">
+            Submit
+          </button>
         </form>
       </div>
     );

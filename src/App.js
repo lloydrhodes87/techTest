@@ -21,9 +21,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Github Search</h1>
+        <h1 className="header">Github Search</h1>
         <Form getSearchValue={this.getSearchValue} />
-        {loading ? <p /> : <Items items={items} />}
+        <div className="content">
+          {loading ? <p /> : <Items items={items} />}
+        </div>
       </div>
     );
   }
