@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from './Components/Form';
 import Items from './Components/Items';
+import Err from './Components/Err';
 import throttle from 'lodash.throttle';
 
 import * as api from './Utils/fetchData';
@@ -12,7 +13,8 @@ class App extends Component {
     value: '',
     items: {},
     loading: true,
-    page: 1
+    page: 1,
+    hasAllItems: false
   };
   render() {
     const { items, loading } = this.state;
@@ -30,9 +32,10 @@ class App extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
+    const { hasAllItems } = this.state;
     if (
-      prevState.value !== this.state.value ||
-      prevState.page !== this.state.page
+      (prevState.value !== this.state.value && !hasAllItems) ||
+      (prevState.page !== this.state.page && !hasAllItems)
     ) {
       this.handleUpdateData();
     }
@@ -65,8 +68,15 @@ class App extends Component {
           items: page === 1 ? items : [...prevState.items, ...items],
           loading: false
         }));
+        if (!items.length) {
+          this.setState({
+            hasAllItems: true
+          });
+        }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        return <Err />;
+      });
   };
 }
 
