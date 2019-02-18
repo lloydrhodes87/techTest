@@ -7,7 +7,7 @@ class Form extends Component {
   render() {
     return (
       <div>
-        <p>This is the form</p>
+        <p>Find a Repo</p>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="seach" />
           <input
@@ -27,7 +27,8 @@ class Form extends Component {
   };
   handleSubmit = event => {
     const { getSearchValue } = this.props;
-    const { value } = this.state;
+    let { value } = this.state;
+    value = value.split(' ').join('+');
     event.preventDefault();
     getSearchValue(value);
     this.setState({
