@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Form from './Components/Form';
 
+import * as api from './Utils/fetchData';
+
 import './App.css';
 
 class App extends Component {
@@ -16,6 +18,14 @@ class App extends Component {
       </div>
     );
   }
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.value !== this.state.value) {
+      const { value } = this.state;
+      console.log(value);
+      api.fetchGithub(value);
+    }
+  };
+
   getSearchValue = value => {
     this.setState({
       value
