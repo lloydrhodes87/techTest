@@ -77,7 +77,7 @@ class App extends Component {
         }
       })
       .catch(err => {
-        return <Err />;
+        return <Err err={err} />;
       });
   };
 }
