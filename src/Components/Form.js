@@ -17,7 +17,7 @@ class Form extends Component {
             className="input"
           />
           <button className="button" type="submit">
-            Submit
+            Search
           </button>
         </form>
       </div>

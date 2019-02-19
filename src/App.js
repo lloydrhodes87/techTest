@@ -14,17 +14,18 @@ class App extends Component {
     items: {},
     loading: true,
     page: 1,
-    hasAllItems: false
+    hasAllItems: false,
+    error: false
   };
   render() {
-    const { items, loading } = this.state;
-
+    const { items, loading, error } = this.state;
     return (
       <div className="App">
         <h1 className="header">Github Search</h1>
         <Form getSearchValue={this.getSearchValue} />
         <div className="content">
           {loading ? <p /> : <Items items={items} />}
+          {error && <Err />}
         </div>
       </div>
     );
@@ -35,6 +36,7 @@ class App extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const { hasAllItems } = this.state;
+
     if (
       (prevState.value !== this.state.value && !hasAllItems) ||
       (prevState.page !== this.state.page && !hasAllItems)
@@ -77,7 +79,10 @@ class App extends Component {
         }
       })
       .catch(err => {
-        return <Err err={err} />;
+        this.setState({
+          error: true,
+          err
+        });
       });
   };
 }

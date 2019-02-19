@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Err = () => {
+const Err = props => {
   return (
     <div>
       <p>Error</p>
-      <p>{this.props.err}</p>
+      <p>{props.err}</p>
     </div>
   );
 };

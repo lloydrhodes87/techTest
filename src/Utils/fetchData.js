@@ -6,3 +6,10 @@ export const fetchGithub = async (search, page) => {
   );
   return data;
 };
+
+export const fetchReadme = async (user, repo) => {
+  const { data } = await axios.get(
+    `https://api.github.com/repos/${user}/${repo}/readme`
+  );
+  return data;
+};

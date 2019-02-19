@@ -1,36 +1,45 @@
 import React, { Component } from 'react';
+import MoreInfo from './MoreInfo';
 
 class Items extends Component {
+  state = {
+    moreInfo: false
+  };
   render() {
     const { items } = this.props;
+    const { moreInfo } = this.state;
     return (
       <div className="itemContainer">
-        {items.map(
-          ({ id, name, owner: { avatar_url }, html_url, forks_count }) => {
-            return (
-              <li key={id}>
-                <div className="item">
-                  <div>
-                    <img className="image" src={avatar_url} alt="avatar" />
-                  </div>
-                  <div>
-                    <p className="text">{name}</p>
-
-                    <p className="text" id="fork">
-                      Fork Count: {forks_count}
-                    </p>
-                    <a className="button" id="button-visit" href={html_url}>
-                      Visit Repo
-                    </a>
-                  </div>
+        {items.map(item => {
+          console.log(item);
+          return (
+            <li key={item.id}>
+              <div className="item">
+                <div>
+                  <img
+                    className="image"
+                    src={item.owner.avatar_url}
+                    alt="avatar"
+                  />
                 </div>
-              </li>
-            );
-          }
-        )}
+                <div>
+                  <p className="text">{item.name}</p>
+
+                  <button onClick={this.showMore}>More Info</button>
+                </div>
+              </div>
+              {moreInfo && <MoreInfo items={item} />}
+            </li>
+          );
+        })}
       </div>
     );
   }
+  showMore = () => {
+    this.setState(prevState => ({
+      moreInfo: !prevState.moreInfo
+    }));
+  };
 }
 
 export default Items;
