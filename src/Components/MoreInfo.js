@@ -14,6 +14,7 @@ class MoreInfo extends Component {
       name,
       owner
     } = this.props.items;
+    const { readMeLink } = this.state;
     return (
       <div className="moreInfo">
         <div>
@@ -35,7 +36,7 @@ class MoreInfo extends Component {
             <a href={html_url}>View Repo</a>
           </button>
           <button className="button" onClick={this.getReadme}>
-            <a href={this.state.readMeLink}>View Readme</a>
+            <a href={readMeLink}>View Readme</a>
           </button>
         </div>
       </div>
