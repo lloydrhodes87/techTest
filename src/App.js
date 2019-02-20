@@ -7,25 +7,44 @@ import throttle from 'lodash.throttle';
 import * as api from './Utils/fetchData';
 
 import './App.css';
+import MoreInfo from './Components/MoreInfo';
 
 class App extends Component {
   state = {
     value: '',
     items: {},
     loading: true,
+    loadingRepo: true,
     page: 1,
     hasAllItems: false,
-    error: false
+    error: false,
+    moreInfo: false,
+    id: '',
+    repoItems: {}
   };
   render() {
-    const { items, loading, error } = this.state;
+    const {
+      items,
+      loading,
+      error,
+      moreInfo,
+      value,
+      repoItems,
+      loadingRepo
+    } = this.state;
+    if (error) return <Err />;
     return (
       <div className="App">
         <h1 className="header">Github Search</h1>
         <Form getSearchValue={this.getSearchValue} />
         <div className="content">
-          {loading ? <p /> : <Items items={items} />}
-          {error && <Err />}
+          {loading && !value && <p />}
+          {!loading && !moreInfo && (
+            <Items items={items} getMoreInfo={this.getMoreInfo} />
+          )}
+          {!loadingRepo && moreInfo && (
+            <MoreInfo items={repoItems} goBackState={this.goBackState} />
+          )}
         </div>
       </div>
     );
@@ -42,6 +61,9 @@ class App extends Component {
       (prevState.page !== this.state.page && !hasAllItems)
     ) {
       this.handleUpdateData();
+    }
+    if (prevState.id !== this.state.id) {
+      this.handleFetchRepo();
     }
   };
 
@@ -62,6 +84,27 @@ class App extends Component {
     this.setState({
       value
     });
+  };
+  getMoreInfo = (bool, id) => {
+    this.setState({
+      moreInfo: bool,
+      id
+    });
+  };
+  handleFetchRepo = () => {
+    const { id } = this.state;
+    api
+      .fetchRepo(id)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          repoItems: res,
+          loadingRepo: false
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   handleUpdateData = () => {
     const { value, page } = this.state;
@@ -84,6 +127,11 @@ class App extends Component {
           err
         });
       });
+  };
+  goBackState = () => {
+    this.setState({
+      moreInfo: false
+    });
   };
 }
 

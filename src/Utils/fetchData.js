@@ -13,3 +13,8 @@ export const fetchReadme = async (user, repo) => {
   );
   return data;
 };
+
+export const fetchRepo = async id => {
+  const { data } = await axios.get(`https://api.github.com/repositories/${id}`);
+  return data;
+};

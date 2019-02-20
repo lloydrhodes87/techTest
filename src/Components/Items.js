@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import MoreInfo from './MoreInfo';
 
 class Items extends Component {
   state = {
-    moreInfo: false
+    moreInfo: false,
+    id: ''
   };
   render() {
     const { items } = this.props;
-    const { moreInfo } = this.state;
     return (
       <div className="itemContainer">
         {items.map(item => {
-          console.log(item);
           return (
             <li key={item.id}>
               <div className="item">
@@ -25,20 +23,32 @@ class Items extends Component {
                 <div>
                   <p className="text">{item.name}</p>
 
-                  <button onClick={this.showMore}>More Info</button>
+                  <button
+                    className="button"
+                    onClick={() => this.showMore(item.id)}
+                  >
+                    More Info
+                  </button>
                 </div>
               </div>
-              {moreInfo && <MoreInfo items={item} />}
+              {/*{moreInfo && <MoreInfo items={item} />}*/}
             </li>
           );
         })}
       </div>
     );
   }
-  showMore = () => {
-    this.setState(prevState => ({
-      moreInfo: !prevState.moreInfo
-    }));
+  showMore = id => {
+    console.log('>>>>>>>', id);
+    this.setState(
+      prevState => ({
+        moreInfo: !prevState.moreInfo,
+        id
+      }),
+      () => {
+        this.props.getMoreInfo(this.state.moreInfo, this.state.id);
+      }
+    );
   };
 }
 
