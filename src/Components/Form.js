@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Form extends Component {
   state = {
-    value: ''
+    searchTerm: ''
   };
   render() {
     return (
@@ -13,7 +13,7 @@ class Form extends Component {
             <input
               id="search"
               name="search"
-              value={this.state.value}
+              value={this.state.searchTerm}
               onChange={this.handleChange}
               className="input"
             />
@@ -27,17 +27,17 @@ class Form extends Component {
   }
   handleChange = event => {
     this.setState({
-      value: event.target.value
+      searchTerm: event.target.value
     });
   };
   handleSubmit = event => {
     const { getSearchValue } = this.props;
-    let { value } = this.state;
-    value = value.split(' ').join('+');
+    let { searchTerm } = this.state;
+    searchTerm = searchTerm.split(' ').join('+');
     event.preventDefault();
-    getSearchValue(value);
+    getSearchValue(searchTerm);
     this.setState({
-      value: ''
+      searchTerm: ''
     });
   };
 }

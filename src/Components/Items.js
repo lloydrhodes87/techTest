@@ -32,7 +32,6 @@ class Items extends Component {
                     </button>
                   </div>
                 </div>
-                {/*{moreInfo && <MoreInfo items={item} />}*/}
               </li>
             );
           })}
@@ -41,7 +40,6 @@ class Items extends Component {
     );
   }
   showMore = id => {
-    console.log('>>>>>>>', id);
     this.setState(
       prevState => ({
         moreInfo: !prevState.moreInfo,

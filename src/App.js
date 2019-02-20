@@ -75,7 +75,6 @@ class App extends Component {
     const fullDocumentHeight = document.body.scrollHeight;
 
     if (distanceFromTop + heightOfScreen > fullDocumentHeight - 100) {
-      console.log('page');
       this.setState(({ page }) => ({
         page: page + 1
       }));
@@ -98,7 +97,6 @@ class App extends Component {
     api
       .fetchRepo(id)
       .then(res => {
-        console.log(res);
         this.setState({
           repoItems: res,
           loadingRepo: false
