@@ -19,7 +19,7 @@ a {
 
 .button {
   font-size: 1rem;
-  background-color: #e85a4f;
+  background-color: #c4463d;
   color: white;
   padding: 10px;
   border-radius: 5px;
@@ -61,12 +61,12 @@ a {
 }
 
 h1 {
-  color: #e85a4f;
+  color: #df473c;
   text-transform: capitalize;
   font-weight: lighter;
   font-size: 4rem;
   letter-spacing: 5px;
-  border-bottom: 1px solid #e85a4f;
+  border-bottom: 1px solid #df473c;
   padding-bottom: 2rem;
 }
 

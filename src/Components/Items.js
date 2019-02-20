@@ -9,32 +9,34 @@ class Items extends Component {
     const { items } = this.props;
     return (
       <div className="itemContainer">
-        {items.map(item => {
-          return (
-            <li key={item.id}>
-              <div className="item">
-                <div>
-                  <img
-                    className="image"
-                    src={item.owner.avatar_url}
-                    alt="avatar"
-                  />
-                </div>
-                <div>
-                  <p className="text">{item.name}</p>
+        <ul>
+          {items.map(item => {
+            return (
+              <li key={item.id}>
+                <div className="item">
+                  <div>
+                    <img
+                      className="image"
+                      src={item.owner.avatar_url}
+                      alt="avatar"
+                    />
+                  </div>
+                  <div>
+                    <p className="text">{item.name}</p>
 
-                  <button
-                    className="button"
-                    onClick={() => this.showMore(item.id)}
-                  >
-                    More Info
-                  </button>
+                    <button
+                      className="button"
+                      onClick={() => this.showMore(item.id)}
+                    >
+                      More Info
+                    </button>
+                  </div>
                 </div>
-              </div>
-              {/*{moreInfo && <MoreInfo items={item} />}*/}
-            </li>
-          );
-        })}
+                {/*{moreInfo && <MoreInfo items={item} />}*/}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
