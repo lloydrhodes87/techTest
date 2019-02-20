@@ -18,6 +18,7 @@ class App extends Component {
     page: 1,
     hasAllItems: false,
     error: false,
+    err: '',
     moreInfo: false,
     id: '',
     repoItems: {}
@@ -27,12 +28,13 @@ class App extends Component {
       items,
       loading,
       error,
+      err,
       moreInfo,
       value,
       repoItems,
       loadingRepo
     } = this.state;
-    if (error) return <Err />;
+    if (error) return <Err err={err} goBackFromError={this.goBackFromError} />;
     return (
       <div className="App">
         <h1 className="header">Github Search</h1>
@@ -78,7 +80,7 @@ class App extends Component {
         page: page + 1
       }));
     }
-  }, 1000);
+  }, 700);
 
   getSearchValue = value => {
     this.setState({
@@ -103,7 +105,10 @@ class App extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
+        this.setState({
+          error: true,
+          err
+        });
       });
   };
   handleUpdateData = () => {
@@ -131,6 +136,11 @@ class App extends Component {
   goBackState = () => {
     this.setState({
       moreInfo: false
+    });
+  };
+  goBackFromError = () => {
+    this.setState({
+      error: false
     });
   };
 }

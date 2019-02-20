@@ -44,6 +44,16 @@ a {
   margin: auto;
 }
 
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #df473c;
+  font-weight: 100;
+}
+
 .find {
   font-size: 1rem;
   color: rgb(58, 58, 58);
@@ -132,5 +142,11 @@ h1 {
   }
   .image {
     margin-left: 3rem;
+  }
+  .itemContainer {
+    margin-right: 2.5rem;
+  }
+  #text {
+    margin-right: 30px;
   }
 }

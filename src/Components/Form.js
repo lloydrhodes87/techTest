@@ -9,7 +9,7 @@ class Form extends Component {
       <div>
         <p className="find">Search for a Repo</p>
         <form className="form" onSubmit={this.handleSubmit}>
-          <label htmlFor="seach" aria-label="search">
+          <label htmlFor="search" aria-label="search">
             <input
               id="search"
               name="search"

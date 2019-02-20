@@ -23,7 +23,7 @@ class MoreInfo extends Component {
         </div>
         <div className="moreInfoItem">
           <img className="image" src={owner.avatar_url} alt="avatar" />
-          <div className="text">
+          <div className="text" id="text">
             <p>Name: {name}</p>
             <p>Fork Count: {forks_count}</p>
             <p>Open Issues Count: {open_issues_count}</p>
